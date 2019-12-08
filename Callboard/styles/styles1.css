@@ -1,0 +1,41 @@
+﻿body 
+{
+    padding-bottom: 80px;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-style: normal;
+}
+
+.my-footer 
+{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #f2f2f2;
+}
+
+.my-margin-top-10
+{
+    margin-top: 10px;
+}
+
+.my-padding-top-1
+{
+    padding-top: 1%
+}
+
+.my-padding-top-7
+{
+    padding-top: 7%
+}
+
+.my-padding-top-8
+{
+    padding-top: 8%
+}
+
+.break-word
+{
+    word-wrap: break-word;
+}

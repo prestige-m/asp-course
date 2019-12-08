@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="index.aspx" title="Головна" description="">
+    <siteMapNode url="finished.aspx" title="Завершені" description="" />
+    <siteMapNode url="sign_in.aspx" title="Вхід до акаунту" description="" />
+    <siteMapNode url="registration.aspx" title="Реєстрація" description="" />
+    <siteMapNode url="admin.aspx" title="Панель Адміністратора" description="" >
+      <siteMapNode url="petitions_edit.aspx" title="Редагування петицій" description="" />
+      <siteMapNode url="followers.aspx" title="Підписи петицій" description="" />
+    </siteMapNode>
+    <siteMapNode url="account.aspx" title="Особистий кабінет" description="">
+      <siteMapNode url="subscribed_petitions.aspx" title="Підтримані мною" description="" />
+      <siteMapNode url="my_petitions.aspx" title="Мої петиції" description="" />
+    </siteMapNode>
+    <siteMapNode url="create_petition.aspx" title="Створити петицію" description="" />
+  </siteMapNode>
+</siteMap>
