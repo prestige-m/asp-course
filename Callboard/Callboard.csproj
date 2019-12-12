@@ -78,7 +78,9 @@
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\jquery-3.2.1.min.js" />
+    <Content Include="scripts\jquery-3.4.1.min.js" />
     <Content Include="scripts\my-datepicker.js" />
+    <Content Include="scripts\my-scripts.js" />
     <Content Include="scripts\popper.min.js" />
     <Content Include="styles\bootstrap-grid.css" />
     <Content Include="styles\bootstrap-grid.min.css" />
@@ -88,8 +90,9 @@
     <Content Include="styles\bootstrap.min.css" />
     <Content Include="styles\font-awesome.css" />
     <Content Include="styles\font-awesome.min.css" />
-    <Content Include="styles\my-styles.css" />
+    <Content Include="styles\styles1.css" />
     <Content Include="Web.config" />
+    <Content Include="WebForm1.aspx" />
     <Content Include="WebService1.asmx" />
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +117,7 @@
     <Compile Include="LoginForm.aspx.designer.cs">
       <DependentUpon>LoginForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="models\Message.cs" />
     <Compile Include="Page404.ascx.cs">
       <DependentUpon>Page404.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -135,6 +139,13 @@
     </Compile>
     <Compile Include="SiteMenu.Master.designer.cs">
       <DependentUpon>SiteMenu.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebService1.asmx.cs">
       <DependentUpon>WebService1.asmx</DependentUpon>

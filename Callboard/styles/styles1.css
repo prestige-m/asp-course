@@ -1,41 +1,64 @@
-﻿body 
-{
-    padding-bottom: 80px;
+﻿
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-style: normal;
 }
 
-.my-footer 
-{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 60px;
-    line-height: 60px;
-    background-color: #f2f2f2;
+
+.img-container {
+   border: 1px solid #e1e1e1;
 }
 
-.my-margin-top-10
-{
+.img-item {
+    width: 220px;
+    height: 160px;
+}
+
+.title {
+    font-size: 20px;
+}
+
+.m-price {
+    color: black;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 50px;
+}
+
+.m-attr, .m-attr-next {
+    color: #8f8f8f;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.m-attr-next::before {
+    content: '>';
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.listbox {
+    height: 400px;
+}
+
+.menu-item {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.page-content {
+    flex: 1 0 auto;
+}
+
+#sticky-footer {
+    flex-shrink: none;
+    background: #f2f2f2;
     margin-top: 10px;
 }
 
-.my-padding-top-1
-{
-    padding-top: 1%
-}
-
-.my-padding-top-7
-{
-    padding-top: 7%
-}
-
-.my-padding-top-8
-{
-    padding-top: 8%
-}
-
-.break-word
-{
-    word-wrap: break-word;
+.footer-text {
+    margin-top: -50px;
 }
