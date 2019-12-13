@@ -106,16 +106,12 @@
         <%} %>
 
        <asp:Repeater id="RepeaterItems" runat="server">
-          <HeaderTemplate>
-          </HeaderTemplate>
-           
+         
           <ItemTemplate>
               <div class="row justify-content-center">
                   <div class="img-container col-sm-9 col-md-9 col-lg-9 rounded my-2">
                       <div class="row">
-                        <%--<div class="col-sm-4 col-md-4 col-lg-4">--%>
-                          <asp:Image ID="ItemImage" runat="server" CssClass="img-item my-3" ImageUrl='<%# string.Format("~/images/{0}", Eval("image_name")) %>' />
-                        <%--</div>--%>
+                         <asp:Image ID="ItemImage" runat="server" CssClass="img-item my-3" ImageUrl='<%# string.Format("~/images/{0}", Eval("image_name")) %>' />
                         <div class="col-sm-12 col-md-7 col-lg-7">
                            <div class="row pt-2">
                                <div class="col-sm-12 col-md-12 col-lg-12 text-truncate">
@@ -124,7 +120,7 @@
                            </div>
                             <div class="row py-3">
                                 <div class="col-sm-12 col-md-12 col-lg-12">
-                                    <asp:Label runat="server" ID="Label1" CssClass="m-price" Text='<%# (Eval("price").ToString() != "")? string.Format("{0} грн.", Eval("price")) : "&nbsp;" %>'></asp:Label>
+                                    <asp:Label runat="server" ID="Label1" CssClass="m-price" Text='<%# (Eval("price").ToString() != "")? string.Format("{0} грн.", Eval("price")) : " &nbsp;" %>'></asp:Label>
                                </div>    
                            </div>
                             <div class="row pt-2">
@@ -151,17 +147,12 @@
                         </div>
 
                       </div>
-                       <%--<asp:Label runat="server" ID="lblTest" Text='<%#DataBinder.Eval(Container.DataItem, "image_name") %>' ></asp:Label>--%>
       
                   </div>
               </div>
               
           </ItemTemplate>
-             
-          <FooterTemplate>
-            <%-- </table>--%>
-          </FooterTemplate>
-             
+                     
        </asp:Repeater>
 </div>
 </div>

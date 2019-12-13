@@ -68,8 +68,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AccountForm.aspx" />
+    <Content Include="AnnounceAdmin.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="index.aspx" />
+    <Content Include="IndexAdmin.aspx" />
     <Content Include="LoginForm.aspx" />
     <Content Include="Page404.ascx" />
     <Content Include="RegisterForm.aspx" />
@@ -103,12 +105,26 @@
     <Compile Include="AccountForm.aspx.designer.cs">
       <DependentUpon>AccountForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AnnounceAdmin.aspx.cs">
+      <DependentUpon>AnnounceAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnnounceAdmin.aspx.designer.cs">
+      <DependentUpon>AnnounceAdmin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IndexAdmin.aspx.cs">
+      <DependentUpon>IndexAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IndexAdmin.aspx.designer.cs">
+      <DependentUpon>IndexAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.aspx.cs">
       <DependentUpon>LoginForm.aspx</DependentUpon>
@@ -117,7 +133,6 @@
     <Compile Include="LoginForm.aspx.designer.cs">
       <DependentUpon>LoginForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="models\Message.cs" />
     <Compile Include="Page404.ascx.cs">
       <DependentUpon>Page404.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
