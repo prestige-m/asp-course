@@ -17,7 +17,7 @@
 
     <body>
     <div class="page-content">
-        <form id="form2" runat="server">
+        <form id="form2" runat="server" enctype="multipart/form-data">
             <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

@@ -25,8 +25,8 @@
             ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" 
             SelectCommand="SELECT * FROM announcements"></asp:SqlDataSource>
 
-        <asp:GridView ID="gridEmployees" runat="server" DataSourceID="SqlDataSource1" CssClass="grid-view table table-responsive table-striped" 
-            AutoGenerateColumns="false" PageSize="4">
+        <asp:GridView ID="gridEmployees" runat="server" DataSourceID="SqlDataSource1"
+            AutoGenerateColumns="false" PageSize="4" CssClass="table table-striped table-bordered table-condensed">
              <HeaderStyle CssClass="thead-dark" />
             <RowStyle  />
             <PagerStyle /> 

@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="AccountForm.aspx" />
     <Content Include="AnnounceAdmin.aspx" />
+    <Content Include="CreateAnnouncement.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="index.aspx" />
     <Content Include="IndexAdmin.aspx" />
@@ -105,6 +106,7 @@
     <Compile Include="AccountForm.aspx.designer.cs">
       <DependentUpon>AccountForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Alert.cs" />
     <Compile Include="AnnounceAdmin.aspx.cs">
       <DependentUpon>AnnounceAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -112,6 +114,14 @@
     <Compile Include="AnnounceAdmin.aspx.designer.cs">
       <DependentUpon>AnnounceAdmin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CreateAnnouncement.aspx.cs">
+      <DependentUpon>CreateAnnouncement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateAnnouncement.aspx.designer.cs">
+      <DependentUpon>CreateAnnouncement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ImageLoader.cs" />
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
