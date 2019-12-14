@@ -68,9 +68,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AccountForm.aspx" />
+    <Content Include="AnnouceView.aspx" />
     <Content Include="AnnounceAdmin.aspx" />
     <Content Include="CreateAnnouncement.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="images\1.jpg" />
+    <Content Include="images\2.jpg" />
+    <Content Include="images\3.jpg" />
+    <Content Include="images\4.jpg" />
+    <Content Include="images\5.jpg" />
     <Content Include="index.aspx" />
     <Content Include="IndexAdmin.aspx" />
     <Content Include="LoginForm.aspx" />
@@ -95,8 +101,8 @@
     <Content Include="styles\font-awesome.min.css" />
     <Content Include="styles\styles1.css" />
     <Content Include="Web.config" />
+    <Content Include="CityService.asmx" />
     <Content Include="WebForm1.aspx" />
-    <Content Include="WebService1.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountForm.aspx.cs">
@@ -107,6 +113,13 @@
       <DependentUpon>AccountForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Alert.cs" />
+    <Compile Include="AnnouceView.aspx.cs">
+      <DependentUpon>AnnouceView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnnouceView.aspx.designer.cs">
+      <DependentUpon>AnnouceView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AnnounceAdmin.aspx.cs">
       <DependentUpon>AnnounceAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -114,6 +127,7 @@
     <Compile Include="AnnounceAdmin.aspx.designer.cs">
       <DependentUpon>AnnounceAdmin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="City.cs" />
     <Compile Include="CreateAnnouncement.aspx.cs">
       <DependentUpon>CreateAnnouncement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -121,6 +135,7 @@
     <Compile Include="CreateAnnouncement.aspx.designer.cs">
       <DependentUpon>CreateAnnouncement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Encrypt.cs" />
     <Compile Include="ImageLoader.cs" />
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
@@ -165,16 +180,16 @@
     <Compile Include="SiteMenu.Master.designer.cs">
       <DependentUpon>SiteMenu.Master</DependentUpon>
     </Compile>
+    <Compile Include="CityService.asmx.cs">
+      <DependentUpon>CityService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebService1.asmx.cs">
-      <DependentUpon>WebService1.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +221,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\user\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

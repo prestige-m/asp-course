@@ -8,43 +8,116 @@
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <% if (Session.Count != 0) { %>
-        <div class="row justify-content-center my-margin-top-10 my-padding-top-1">
-            <h1 class="display-4">Особистий кабінет</h1>
+        <div class="row justify-content-center mt-2">
+            <h1 class="display-5">Особистий кабінет</h1>
         </div>
 
-       
-         <div class="row">
-            <div class="col-md-4 offset-md-4 mt-3">
-                <asp:TextBox ID="first_name" CssClass="form-control" runat="server" required="required" minlength="2" maxlength="100"></asp:TextBox>
-            </div>
-        </div>
-         <div class="row">
-            <div class="col-md-4 offset-md-4 mt-3">
-                <asp:TextBox ID="last_name" CssClass="form-control" runat="server" required="required"  minlength="2" maxlength="100"></asp:TextBox>
-            </div>
-        </div>
-         <div class="row">
-            <div class="col-md-4 offset-md-4 mt-3">
-                <asp:TextBox ID="patronymic" CssClass="form-control" runat="server" required="required" minlength="2" maxlength="100"></asp:TextBox>
-            </div>
-        </div>
-        <div class="row">
-           <div class="col-md-4 offset-md-4 mt-3">
-                <asp:TextBox ID="email" CssClass="form-control" runat="server" type="email" required="required" minlength="4" maxlength="128"></asp:TextBox>
+    <div class="row justify-content-center">
+      <div class="col-md-4 col-sm-4 col-lg-4" align="center">
+        <div>
+            <asp:Image ID="Image1" runat="server" CssClass="rounded" style="height:256px; width: 256px;" ImageUrl="~/images/user/default.png" />
+
+              <div class="row justify-content-center py-2">
+        		<div align="center" class="col-sm-8 col-md-8 col-lg-8">
+                     <asp:FileUpload ID="FileUpload1" runat="server" required class="form-control" />
+        		</div>
+              </div>
+        		<div class="row justify-content-center py-2">
+          			<div align="center" class="col-sm-8 col-md-8 col-lg-8">
+                      <asp:Button ID="Button1" runat="server" class="btn btn-secondary btn-block" Text="Замінити фото" />
+          			</div>
+        		</div>
+  	   </div>
+    </div>
+
+
+  <div class="col-md-8 col-lg-8 col-sm-8">
+      <ul class="list-group">
+          <li class="list-group-item">
+              <div class="row">
+                 <div class="col-md-4 col-sm-4 col-lg-4">
+                   <strong>Прізвище:</strong>
+                 </div>
+                 <div class="col-md-7 col-sm-7 col-lg-7">
+                     <asp:TextBox ID="last_name" CssClass="form-control" runat="server" required="required"  maxlength="100"></asp:TextBox>
+                 </div>
+              </div>
+           </li>
+           <li class="list-group-item">
+              <div class="row">
+                 <div class="col-md-4 col-sm-4 col-lg-4">
+                   <strong>Ім’я:</strong>
+                 </div>
+                 <div class="col-md-7 col-sm-7 col-lg-7">
+                     <asp:TextBox ID="first_name" CssClass="form-control" runat="server" required="required" maxlength="100"></asp:TextBox>
+                 </div>
+              </div>
+           </li> 
+           <li class="list-group-item">
+              <div class="row">
+                 <div class="col-md-4 col-sm-4 col-lg-4">
+                   <strong>По батькові:</strong>
+                 </div>
+                 <div class="col-md-7 col-sm-7 col-lg-7">
+                     <asp:TextBox ID="patronymic" CssClass="form-control" runat="server" required="required" maxlength="100"></asp:TextBox>
+                 </div>
+              </div>
+           </li>
+           <li class="list-group-item">
+              <div class="row">
+                 <div class="col-md-4 col-sm-4 col-lg-4">
+                   <strong>Електронна адреса:</strong>
+                 </div>
+                 <div class="col-md-7 col-sm-7 col-lg-7">
+                     <asp:TextBox ID="email" CssClass="form-control" runat="server" type="email" required="required" maxlength="100"></asp:TextBox>
+                 </div>
+              </div>
+           </li>
+           <li class="list-group-item">
+              <div class="row">
+                 <div class="col-md-4 col-sm-4 col-lg-4">
+                   <strong>Телефон:</strong>
+                 </div>
+                 <div class="col-md-7 col-sm-7 col-lg-7">
+                      <asp:TextBox ID="contact" CssClass="form-control" runat="server"  required="required" pattern="[+]?([0-9]{1,3})?[0-9]{10}"></asp:TextBox>
+                 </div>
+              </div>
+           </li>
+           <li class="list-group-item">
+              <div class="row justify-content-center">
+                 <div class="col-md-6 col-sm-6 col-lg-6">
+                     <asp:Button ID="submit" CssClass="btn btn-outline-dark btn-block" runat="server" Text="Змінити дані" OnClick="UpdateUserInfo" />
+                </div>
+              </div>
+           </li>
+        </ul>
+
+    <div class="page-buffer mt-5">
+          <div class="row justify-content-center">
+              <div class="col-sm-8 col-md-8 col-lg-8">
+                  <strong>Змінити пароль:</strong>
+              </div>
+          </div>
+          <div class="row justify-content-center">
+              <div class="col-sm-8 col-md-8 col-lg-8">
+                  <asp:TextBox ID="TextBox1" runat="server" required class="form-control" type="password" maxlength="32"  placeholder="Новий пароль"></asp:TextBox>
+              </div>
+          </div>
+          <div class="row justify-content-center">
+              <div class="col-sm-8 col-md-8 col-lg-8">
+                   <asp:TextBox ID="TextBox2" runat="server" required class="form-control mt-3" type="password" maxlength="32"  placeholder="Підтвердження паролю"></asp:TextBox>
+              </div>
+          </div>
+          <div class="row justify-content-center mt-3">
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                  <asp:Button ID="Button2" runat="server" Text="Змінити пароль" class="btn btn-outline-primary btn-block" OnClick="ChangePassword"/>
+              </div>
            </div>
-        </div>
-         <div class="row">
-            <div class="col-md-4 offset-md-4 mt-3">
-                <asp:TextBox ID="contact" CssClass="form-control" runat="server"  required="required" Rows="2" TextMode="MultiLine"></asp:TextBox>
-            </div>
-        </div>
+    </div>
+  </div>
 
-
-       <div class="row justify-content-center">
-            <div class="col-6 col-md-2 mt-3">
-                <asp:Button ID="submit" CssClass="btn btn-outline-dark btn-block" runat="server" Text="Зберегти" OnClick="UpdateUserInfo" />
-            </div>
-        </div>
+  </div>     
+       
 
 
     <% } else { %>

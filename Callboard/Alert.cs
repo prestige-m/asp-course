@@ -1,19 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace Callboard
 {
-    public static class Alert
+    public class Alert
     {
-        public static string getErrorAlert(string errorMessage)
+        private StringBuilder messages = new StringBuilder("<div class=\"alert alert-success\" role=\"alert\"><ul>");
+        private StringBuilder errors = new StringBuilder("<div class=\"alert alert-danger\" role=\"alert\"><ul>");
+        private int errorCounter = 0;
+        private int messageCounter = 0;
+        public string getErrors()
         {
-            return $"<div class=\"alert alert-danger\" role=\"alert\">{errorMessage}</div>";
+            if (errorCounter > 0)
+            {
+                errors.Append("</ul></div>");
+                return errors.ToString();
+            }
+            return "";
         }
-        public static string getMessageAlert(string message)
+        public string getMessages()
         {
-            return $"<div class=\"alert alert-success\" role=\"alert\">{message}</div>";
+            if (messageCounter > 0)
+            {
+                messages.Append("</ul></div>");
+                return messages.ToString();
+            }
+            return "";
+        }
+
+        public void AddMessageAlert(string text)
+        {
+            messages.Append($"<li>{text}</li>");
+            messageCounter++;
+        }
+
+        public void AddErrorAlert(string text)
+        {
+            errors.Append($"<li>{text}</li>");
+            errorCounter++;
+        }
+
+        public string GetAlerts()
+        {
+            return this.getErrors() + this.getMessages();
         }
     }
 }

@@ -1,33 +1,26 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMenu.Master" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="Callboard.WebForm1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMenu.Master" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="Callboard.WebForm1" EnableEventValidation="false" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+     <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+        <Services>
+            <asp:ServiceReference Path="~/CityService.asmx" />
+        </Services>
+    </asp:ScriptManager>
 
-<div class="modal   " id="sample_modal" role="dialog" tabindex="-1" >
-<div class="modal-dialog ">
-<asp:UpdatePanel ID="UpdatePanel2" runat="server" EnableViewState="true">
-<ContentTemplate>
-        <div class=" modal-content">
-        <div class="modal-header">Modal Heading</div>
-        <div class="modal-body col-sm-12">
-        <div class="form-group ">
-        <label class="col-sm-4 control-label">New Category</label>
-        <div class="col-sm-8">
-        <asp:TextBox ID="txtCat" CssClass="form-control" runat="server" TextMode="MultiLine"></asp:TextBox>
-        <asp:RequiredFieldValidator ID="rfv1" CssClass="alert-danger" ControlToValidate="txtCat" ValidationGroup="save-modal" SetFocusOnError="true" Display="Dynamic" runat="server" 
-            ErrorMessage="Please Enter category!!!"></asp:RequiredFieldValidator>
-        </div>
-        </div>
-        </div>
-        <div class="modal-footer">
-        <asp:Button ID="btn_save" runat="server" CssClass="btn btn-primary" Text="Add" OnClick="btn_save_Click" ValidationGroup="save-modal"   />
-        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-        </div>
-        </div>
-</ContentTemplate>
-</asp:UpdatePanel>
-</div>
-</div>
+Your Name : 
+<asp:TextBox ID="txtUserName" runat="server"></asp:TextBox>
+<input id="btnGetTime" type="button" value="Show Current Time" onclick="GetCities(this.value);" />
 
-    <button type="button" id="btn_open_modal" class="btn btn-primary btn-lg ">Add New Category</button>
+  <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" 
+                                 SelectCommand="SELECT regions.id as region_id, regions.name as region_name FROM regions"
+                                 ></asp:SqlDataSource>
+
+                     <asp:DropDownList ID="DropDownList3" runat="server" class="form-control target" DataSourceID="SqlDataSource3"
+                         DataTextField="region_name" DataValueField="region_id" onchange="GetCities(this.value);"></asp:DropDownList>
+                     <asp:DropDownList ID="DropDownList4" class="form-control container_list" runat="server"
+                         DataTextField="city_name" DataValueField="city_id"  onchange="SetChange(this.value);"></asp:DropDownList>
+
+
 </asp:Content>
+

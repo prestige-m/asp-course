@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -22,64 +23,111 @@ namespace Callboard
             string connectionString = WebConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             connection = new SqlConnection(connectionString);
 
-            if (IsPostBack)
+        }
+
+        [WebMethod()]
+        [System.Web.Script.Services.ScriptMethod]
+        public static List<City> GetCitiesInRegion(int regionID)
+        {
+            CityService service = new CityService();
+            return service.GetCitiesInRegion(regionID);
+        }
+
+        public int ChangeImage(int id, string imageName)
+        {
+            string queryStr = "UPDATE announcements SET image_name=@image_name WHERE id=@id";
+
+            int result = 0;
+            connection.Open();
+            SqlCommand command = new SqlCommand(queryStr, connection);
+            command.CommandType = CommandType.Text;
+            command.Parameters.Add("@image_name", SqlDbType.VarChar, 100).Value = imageName;
+            command.Parameters.Add("@id", SqlDbType.Int).Value = id;
+
+            try
             {
-                 + "\\" + newName;
-                ImageLoader.SaveImage(FileUpload1, Server.MapPath("images"))
+                result = command.ExecuteNonQuery();
             }
-        }
-
-
-
-        public void GetSubcategoriesByCategoryId(int category_id)
-        {
-            string queryString = "SELECT subcategories.id as subcategory_id, subcategories.name as subcategory_name FROM subcategories " +
-                "WHERE subcategories.category_id = @subcategory_id";
-
-            SqlCommand select = new SqlCommand(queryString, connection);
-            select.CommandType = CommandType.Text;
-            select.Parameters.Add("@subcategory_id", SqlDbType.Int).Value = category_id;
-            using (SqlDataAdapter adapter = new SqlDataAdapter(select))
+            catch {}
+            finally
             {
-                adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-                DataSet subcategories = new DataSet();
-                adapter.Fill(subcategories);
-
-                DropDownList2.DataSource = subcategories;
-                DropDownList2.DataBind();
+                connection.Close();
             }
+            return result;
         }
 
-        public void GetCitiesByRegionId(int region_id)
+        public int InsertAnnounce(string title, int user_id, int subcategory_id, int city_id, string message, decimal? price)
         {
-            string queryString = "SELECT cities.id as city_id, cities.name as city_name FROM cities WHERE cities.region_id = @region_id";
-
-            SqlCommand select = new SqlCommand(queryString, connection);
-            select.CommandType = CommandType.Text;
-            select.Parameters.Add("@region_id", SqlDbType.Int).Value = region_id;
-            using (SqlDataAdapter adapter = new SqlDataAdapter(select))
+            string queryStr = "INSERT INTO announcements (title, user_id, subcategory_id, city_id, message_text, price) " +
+                         "VALUES (@title, @user_id, @subcategory_id, @city_id, @message, @price)";
+            if (price == null)
             {
-                adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-                DataSet cities = new DataSet();
-                adapter.Fill(cities);
-
-                DropDownList4.DataSource = cities;
-                DropDownList4.DataBind();
+                queryStr = "INSERT INTO announcements (title, user_id, subcategory_id, city_id, message_text) " +
+                        "VALUES (@title, @user_id, @subcategory_id, @city_id, @message)";
             }
+
+            int lastID= 0;
+            connection.Open();
+            SqlCommand command = new SqlCommand(queryStr, connection);
+            command.CommandType = CommandType.Text;
+            command.Parameters.Add("@title", SqlDbType.VarChar, 150).Value = title;
+            command.Parameters.Add("@user_id", SqlDbType.Int).Value = user_id;
+            command.Parameters.Add("@subcategory_id", SqlDbType.Int).Value = subcategory_id;
+            command.Parameters.Add("@city_id", SqlDbType.Int).Value = city_id;
+            command.Parameters.Add("@message", SqlDbType.Text).Value = message;
+            if (price != null)
+                command.Parameters.Add("@price", SqlDbType.Decimal).Value = price;
+
+            try
+            {
+                command.ExecuteNonQuery();
+                string sql = "SELECT MAX(id) AS LastID FROM announcements";
+                SqlCommand select = new SqlCommand(sql, connection);
+                select.CommandType = CommandType.Text;
+                SqlDataReader reader = select.ExecuteReader();
+                reader.Read();
+                lastID = int.Parse(reader["LastID"].ToString());
+            }
+            catch { }
+            finally
+            {
+                connection.Close();
+            }
+            return lastID;
         }
 
-        protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
+        protected void Button1_Click(object sender, EventArgs e)
         {
-            DropDownList list = (DropDownList)sender;
-            int regionId = int.Parse(list.SelectedValue);
-           // GetCitiesByRegionId(regionId);
-        }
+            string title = TextBox1.Text;
+            int city_id = int.Parse(DropDownList1.SelectedValue);
+            int subcategory_id = int.Parse(Label1.Text);
+            string message = TextBox2.Text;
+            decimal? price = null;
+            int userId = int.Parse(Session["id"].ToString());
+            try
+            {
+                price = decimal.Parse(TextBox3.Text);
+            }
+            catch
+            {
+                price = null;
+            }
 
-        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DropDownList list = (DropDownList)sender;
-            int categoryId = int.Parse(list.SelectedValue);
-           // GetSubcategoriesByCategoryId(categoryId);
+            Alert alerts = new Alert();
+            int annouce_id = InsertAnnounce(title, userId, subcategory_id, city_id, message, price);
+            if (annouce_id > 0)
+            {
+                alerts.AddMessageAlert("Оголошення успішно додано.");
+                string imageName = ImageLoader.SaveImage(ref alerts, FileUpload1, Server.MapPath("images"), annouce_id);
+                ChangeImage(annouce_id, imageName);
+            }
+            else
+            {
+                //result = Alert.getErrorAlert("Помилка при завантаженні даних у базу!");
+            }
+           
+            //Response.Write(alerts.GetAlerts());
+            msg.InnerHtml = alerts.GetAlerts();
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -15,18 +15,19 @@ namespace Callboard
 
         }
 
-        protected void btn_save_Click(object sender, EventArgs e)
+        [System.Web.Services.WebMethod]
+        public static string GetCurrentTime(string name)
         {
-            if (IsValid)
-            {
-                //txtCat.Items.Insert(3, txtCat.Text);
-                //lblmsg.Text = "Item successfully added to category dropdown ";
-                //lblmsg.CssClass = "alert alert-success pull-right";
-                //string strJsSuccess = new StringBuilder
-                //("$('#sample_modal').modal('hide');").ToString();
-                //ScriptManager.RegisterClientScriptBlock
-                //(this, this.GetType(), "Hide", strJsSuccess, true);
-            }
+            return "Hello " + name + Environment.NewLine + "The Current Time is: "
+                + DateTime.Now.ToString();
+        }
+
+        [WebMethod()]
+        [System.Web.Script.Services.ScriptMethod]
+        public static List<City> GetCitiesInRegion(int regionID)
+        {
+            CityService service = new CityService();
+            return service.GetCitiesInRegion(regionID);
         }
     }
 }

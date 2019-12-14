@@ -1,8 +1,18 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMenu.Master" AutoEventWireup="true" CodeBehind="CreateAnnouncement.aspx.cs" Inherits="Callboard.CreateAnnouncement" Async="true" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMenu.Master" AutoEventWireup="true" CodeBehind="CreateAnnouncement.aspx.cs" Inherits="Callboard.CreateAnnouncement" EnableEventValidation="false" %>
+<%@ Register TagPrefix="usercontrol" TagName="Page404" Src="~/Page404.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
+    <div class="row justify-content-center my-2" ><div id="msg" runat="server" class="col-sm-8 col-md-8 col-lg-6"></div></div>
 
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+        <Services>
+            <asp:ServiceReference Path="~/CityService.asmx" />
+        </Services>
+    </asp:ScriptManager>
+
+    <% if (Session.Count != 0) { %>
     <asp:SqlDataSource ID="AnnounceData" runat="server" 
         ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" 
         SelectCommand="SELECT announcements.id as id, title, user_id, announcements.subcategory_id as subcategory_id, subcategories.name as subcategory_name,
@@ -21,9 +31,8 @@
                    <strong>Заловок оголошення</strong>
                  </div>
                  <div class="col-md-8 col-sm-8 col-lg-8">
-                     <asp:TextBox ID="AnnounceTitle" runat="server" required class="form-control"></asp:TextBox>
-                    <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Заповніть поле 'Заголовок'" ControlToValidate="AnnounceTitle"></asp:RequiredFieldValidator>
-               --%>  </div>
+                     <asp:TextBox ID="TextBox1" runat="server" required class="form-control"></asp:TextBox>
+                 </div>
               </div>
            </li>
            <li class="list-group-item">
@@ -43,7 +52,7 @@
                            </FilterParameters>
                       </asp:SqlDataSource>
                      <asp:DropDownList ID="DropDownList1" runat="server" class="form-control" AutoPostBack="true" DataSourceID="SqlDataSource1"
-                         DataTextField="category_name" DataValueField="category_id" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged"></asp:DropDownList>
+                         DataTextField="category_name" DataValueField="category_id"></asp:DropDownList>
                      <asp:DropDownList ID="DropDownList2" runat="server" class="form-control" DataSourceID="SqlDataSource2"
                          DataTextField="subcategory_name" DataValueField="subcategory_id"></asp:DropDownList>
                  </div>
@@ -58,17 +67,12 @@
                      <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" 
                                  SelectCommand="SELECT regions.id as region_id, regions.name as region_name FROM regions"
                                  EnableCaching="True" CacheDuration="20"></asp:SqlDataSource>
-                           <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" 
-                                 SelectCommand="SELECT id as city_id, name as city_name, region_id FROM cities"
-                                 FilterExpression="region_id='{0}'" EnableCaching="true">
-                          <FilterParameters>
-                              <asp:ControlParameter ControlID="DropDownList3" Name="region_id" PropertyName="SelectedValue" />
-                          </FilterParameters>
-                      </asp:SqlDataSource>
-                     <asp:DropDownList ID="DropDownList3" runat="server" AutoPostBack="true" class="form-control" DataSourceID="SqlDataSource3"
-                         DataTextField="region_name" DataValueField="region_id" OnSelectedIndexChanged="DropDownList3_SelectedIndexChanged"></asp:DropDownList>
-                     <asp:DropDownList ID="DropDownList4" class="form-control" runat="server"  DataSourceID="SqlDataSource4"
+
+                     <asp:DropDownList ID="DropDownList3" runat="server" class="form-control target" DataSourceID="SqlDataSource3"
+                         DataTextField="region_name" DataValueField="region_id" onchange="GetCities(this.value);"></asp:DropDownList>
+                     <asp:DropDownList ID="DropDownList4" name="list-data" class="form-control container_list" runat="server" onchange="SetChange(this.value);"
                          DataTextField="city_name" DataValueField="city_id"></asp:DropDownList>
+                     <asp:Label ID="Label1" runat="server" CssClass="val" Text="1" Visible="false"></asp:Label>
                  </div>
               </div>
            </li>
@@ -78,7 +82,7 @@
                    <strong>Текст оголошення:</strong>
                  </div>
                  <div class="col-md-8 col-sm-8 col-lg-8">
-                     <asp:TextBox ID="TextBox1" required CssClass="form-control" runat="server" Rows="5" TextMode="MultiLine"></asp:TextBox>
+                     <asp:TextBox ID="TextBox2" required CssClass="form-control" runat="server" Rows="5" TextMode="MultiLine"></asp:TextBox>
                  </div>
               </div>
            </li>
@@ -88,7 +92,7 @@
                    <strong>Ціна:</strong>
                  </div>
                  <div class="col-md-8 col-sm-8 col-lg-8">
-                     <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" pattern="[0-9]*([.,][0-9]{1,2})?"></asp:TextBox>
+                     <asp:TextBox ID="TextBox3" runat="server" CssClass="form-control" pattern="[0-9]*([.,][0-9]{1,2})?"></asp:TextBox>
                  </div>
               </div>
            </li>
@@ -106,13 +110,15 @@
            <li class="list-group-item">
               <div class="row justify-content-center">
                  <div class="col-md-6 col-sm-6 col-lg-6">
-                     <asp:Button ID="Button1" runat="server" Text="Додати оголошення" class="btn btn-outline-dark btn-block"/>
+                     <asp:Button ID="Button1" runat="server" Text="Додати оголошення" class="btn btn-outline-dark btn-block" OnClick="Button1_Click"/>
                 </div>
               </div>
            </li>
         </ul>
    
     </div>
-
+     <% } else { %>
+        <usercontrol:Page404 id="Page404" runat="server" />    
+    <% } %>
 
 </asp:Content>

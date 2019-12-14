@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
@@ -29,14 +31,69 @@ namespace Callboard
             }     
         }
 
-        //protected void UpdateUserForm()
-        //{
-        //    first_name.Text = Session["first_name"].ToString();
-        //    last_name.Text = Session["last_name"].ToString();
-        //    patronymic.Text = Session["patronymic"].ToString();
-        //    email.Text = Session["email"].ToString();
-        //    contact.Text = Session["contact"].ToString();
-        //}
+        public static string GetHash(MD5 md5, string input)
+        {
+            byte[] data = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+                stringBuilder.Append(data[i].ToString("x2"));
+            return stringBuilder.ToString();
+        }
+
+        public int ChangeImage(int id, string imageName)
+        {
+            string queryStr = "UPDATE announcements SET image_name=@image_name WHERE id=@id";
+
+            int result = 0;
+            connection.Open();
+            SqlCommand command = new SqlCommand(queryStr, connection);
+            command.CommandType = CommandType.Text;
+            command.Parameters.Add("@image_name", SqlDbType.VarChar, 100).Value = imageName;
+            command.Parameters.Add("@id", SqlDbType.Int).Value = id;
+
+            try
+            {
+                result = command.ExecuteNonQuery();
+            }
+            catch { }
+            finally
+            {
+                connection.Close();
+            }
+            return result;
+        }
+
+        protected void ChangePassword(object sender, EventArgs e)
+        {
+            string pass = TextBox1.Text;
+            string pass_repeat = TextBox2.Text;
+            Alert alert = new Alert();
+            if (pass != pass_repeat)
+            {
+                alert.AddErrorAlert("Паролі не співпадають!");
+                Response.Write(alert.GetAlerts());
+                return;
+            }
+
+            try
+            {
+                connection.Open();
+                SqlCommand select = new SqlCommand("UPDATE users SET password=@pass WHERE id=@user_id", connection);
+                select.CommandType = System.Data.CommandType.Text;
+                select.Parameters.AddWithValue("@user_id", int.Parse(Session["id"].ToString()));
+                select.Parameters.AddWithValue("@pass", GetHash(MD5.Create(), pass));
+                select.ExecuteNonQuery();
+                LoadUserInfo();
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
 
         protected void LoadUserInfo()
         {

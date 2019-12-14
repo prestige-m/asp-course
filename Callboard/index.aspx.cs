@@ -34,13 +34,17 @@ namespace Callboard
 
             if(!IsPostBack)
             {
-                SearchAnnounce();
+                
             }
 
             if (Request.QueryString["search_by_category_id"] != null && Request.QueryString["search_by_category_id"]!="")
             {
                 int categoryId = int.Parse(Request.QueryString["search_by_category_id"]);
                 SearchAnnounceByCategoryId(categoryId);
+            }
+            else
+            {
+                SearchAnnounce();
             }
         }
 

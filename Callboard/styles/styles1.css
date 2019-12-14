@@ -1,6 +1,5 @@
 ﻿
 html, body {
-    height: 100%;
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
@@ -49,22 +48,27 @@ html, body {
     padding-bottom: 5px;
 }
 
-.page-content {
-    flex: 1 0 auto;
-    height: 100%;
-    min-height: 100%;
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #f2f2f2;
 }
 
-#sticky-footer {
-    flex-shrink: none;
-    background: #f2f2f2;
-    margin-top: 10px;
+.page-buffer {
+    height: 80px;
+    width: 100%;
 }
 
-.footer-text {
-    margin-top: -50px;
+.view-container {
+    width: 600px;
+    height: 340px;
 }
 
-.grid-view {
-    border: 0;
+.avatar {
+    width: 32px;
+    height: 32px;
 }

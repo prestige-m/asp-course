@@ -42,7 +42,7 @@
         </div>
          <div class="row">
             <div class="col-md-4 offset-md-4 mt-3">
-                <asp:TextBox ID="contact" CssClass="form-control" runat="server"  required="required" placeholder="Контактна інформація" Rows="2" TextMode="MultiLine"></asp:TextBox>
+                <asp:TextBox ID="contact" CssClass="form-control" runat="server"  required="required" placeholder="Телефон" pattern="[+]?([0-9]{1,3})?[0-9]{10}"></asp:TextBox>
             </div>
         </div>
 
