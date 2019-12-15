@@ -93,7 +93,7 @@ namespace Callboard
             }
             if (pass_repeat == string.Empty)
             {
-                alert.AddErrorAlert("Заповніть поле 'Підтвердження паролю'!");
+                
             }
             if (pass != pass_repeat)
             {
@@ -113,13 +113,14 @@ namespace Callboard
                 select.Parameters.AddWithValue("@pass", GetHash(MD5.Create(), pass));
                 select.ExecuteNonQuery();
                 LoadUserInfo();
+                alert.AddMessageAlert("Пароль успішно змінено.");
             }
             catch
             {
-
             }
             finally
             {
+                msg.InnerHtml = alert.GetAlerts();
                 connection.Close();
             }
         }
@@ -176,7 +177,7 @@ namespace Callboard
                 select.Parameters.AddWithValue("@patronymic", patronymic.Text);
                 select.Parameters.AddWithValue("@email", email.Text);
                 select.Parameters.AddWithValue("@phone", contact.Text);
-                select.Parameters.AddWithValue("@city_id", contact.Text);
+                select.Parameters.AddWithValue("@city_id", int.Parse(DropDownList1.SelectedValue));
                 select.ExecuteNonQuery();
                 alert.AddMessageAlert("Дані успішно оновлено.");
                 LoadUserInfo();

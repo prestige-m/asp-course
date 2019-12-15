@@ -58,11 +58,11 @@ namespace Callboard
 
         public int InsertAnnounce(string title, int user_id, int subcategory_id, string message, decimal? price)
         {
-            string queryStr = "INSERT INTO announcements (title, user_id, subcategory_id, city_id, message_text, price) " +
+            string queryStr = "INSERT INTO announcements (title, user_id, subcategory_id, message_text, price) " +
                          "VALUES (@title, @user_id, @subcategory_id, @message, @price)";
             if (price == null)
             {
-                queryStr = "INSERT INTO announcements (title, user_id, subcategory_id, city_id, message_text) " +
+                queryStr = "INSERT INTO announcements (title, user_id, subcategory_id, message_text) " +
                         "VALUES (@title, @user_id, @subcategory_id, @message)";
             }
 

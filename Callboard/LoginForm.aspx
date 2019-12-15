@@ -11,6 +11,9 @@
          <div class="row justify-content-center mt-2">
             <h1 class="display-5">Вхід</h1>
         </div>
+       <div class="row justify-content-center my-2" >
+           <div id="msg" runat="server" class="col-sm-5 col-md-5 col-lg-5"></div>
+       </div>
         <div class="row justify-content-center">
             <div class="col-12 col-md-5 mt-3">
                 <asp:TextBox ID="email" CssClass="form-control" runat="server" required="required" type="email" placeholder="Електронна адреса"></asp:TextBox>

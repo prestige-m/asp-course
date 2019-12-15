@@ -23,10 +23,17 @@
 
  <div class="row justify-content-center">
     <div class="col-sm-9 col-md-9 col-lg-9">
-       <asp:Repeater id="RepeaterItems" runat="server">
 
-          <ItemTemplate>
-           
+         <% if ( this.announcements.Tables[0].Rows.Count == 0) {%>
+        <div class="row justify-content-center">
+           <div class="col-sm-9 col-md-9 col-lg-9 my-2">
+                 На жаль нічого не знайдено. <i class="far fa-frown-open"></i>
+           </div>
+        </div>
+        <%} %>
+
+       <asp:Repeater id="RepeaterItems" runat="server">
+          <ItemTemplate> 
             <div class="link-box">
               <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# string.Format("AnnouceView.aspx?announce_id={0}", Eval("id")) %>'></asp:HyperLink>
               <div class="row justify-content-center">

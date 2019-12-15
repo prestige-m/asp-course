@@ -49,6 +49,7 @@ namespace Callboard
 
         protected void Registration(object sender, EventArgs e)
         {
+            Alert alert = new Alert();
             if (password.Text == password_repeat.Text)
             {
                 try
@@ -63,7 +64,7 @@ namespace Callboard
                     {
                         if (email.Text == reader["email"].ToString())
                         {
-                            errors.Text = "Користувач з таким e-mail вже існує!";
+                            alert.AddErrorAlert("Користувач з таким e-mail вже існує!");
                             password.Text = password_repeat.Text = "";
                             error = true;
                             break;
@@ -108,7 +109,7 @@ namespace Callboard
                 }
                 catch
                 {
-                    errors.Text = "Виникла помилка на стороні сервера.";
+                    alert.AddErrorAlert("Виникла помилка на стороні сервера.");
                     password.Text = password_repeat.Text = "";
                 }
                 finally
@@ -118,9 +119,10 @@ namespace Callboard
             }
             else
             {
-                errors.Text = "Паролі не співпадають!";
+                alert.AddErrorAlert("Паролі не співпадають!");
                 password.Text = password_repeat.Text = "";
             }
+            msg.InnerHtml = alert.GetAlerts();
         }
     }
 }

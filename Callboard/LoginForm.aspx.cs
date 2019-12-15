@@ -38,8 +38,9 @@ namespace Callboard
 
         protected void Login(object sender, EventArgs e)
         {
+            Alert alert = new Alert();
             try
-            {
+            { 
                 connection.Open();
                 SqlCommand select = new SqlCommand("SELECT * FROM users WHERE email = @email and password = @password", connection);
                 select.CommandType = CommandType.Text;
@@ -59,17 +60,18 @@ namespace Callboard
                     Session.Add("city_id", reader["city_id"].ToString());
                     Response.Redirect("index.aspx");
                 }
-                errors.Text = "Користувача не знайдено!";
+                alert.AddErrorAlert("Користувача не знайдено!");
             }
             catch
             {
-                errors.Text = "Виникла помилка на стороні сервера.";
+                alert.AddErrorAlert("Виникла помилка на стороні сервера.");
                 password.Text = "";
             }
             finally
             {
                 connection.Close();
             }
+            msg.InnerHtml = alert.GetAlerts();
         }
     }
 }

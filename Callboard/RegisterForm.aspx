@@ -16,6 +16,9 @@
         <div class="row justify-content-center mt-2">
             <h1 class="display-5">Реєстрацiя</h1>
         </div>
+        <div class="row justify-content-center my-2" >
+           <div id="msg" runat="server" class="col-sm-4 col-md-4 col-lg-4"></div>
+       </div>
         <div class="row">
             <div class="col-md-4 offset-md-4 mt-3">
                 <asp:TextBox ID="email" CssClass="form-control" runat="server" type="email" required="required" placeholder="Електронна адреса" minlength="4" maxlength="128"></asp:TextBox>

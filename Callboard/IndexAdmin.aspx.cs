@@ -11,7 +11,10 @@ namespace Callboard
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            ScriptManager.ScriptResourceMapping.AddDefinition("jquery", new ScriptResourceDefinition
+            {
+                Path = "~/js/jquery-3.2.1.min.js",
+            });
         }
     }
 }

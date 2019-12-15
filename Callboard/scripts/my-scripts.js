@@ -12,21 +12,6 @@ $(document).ready(function() {
 });
 
 function GetCities(regionID) {
-    //$.ajax({
-    //    type: "POST",
-    //    url: "WebForm1.aspx/GetCitiesInRegion",
-    //    data: '{regionID: ' + regionID + '}',
-    //    contentType: "application/json; charset=utf-8",
-    //    dataType: "json",
-        
-    //    success: function(result) {
-    //        OnSuccess(result);
-    //        //alert(data.d); // trueconsole.log("Success");
-    //    },
-    //    error: function(xhr, status, error) {
-    //        alert(xhr.responseText);  // to see the error message
-    //    }
-    //});
    PageMethods.GetCitiesInRegion(regionID, OnSuccess, OnError);
 }
 
@@ -39,7 +24,6 @@ function OnSuccess(result) {
     $.each(result, function(k, v) {
         dropdown.append($("<option />").html(this.Name).val(this.ID));
     });
-    //dropdown.prop('selectedIndex', 0);
 }
 
 function OnError(result) {
@@ -53,6 +37,4 @@ $(".link-box").click(function() {
 
 function SetChange(param) {
     $(".val").text(param);
-    //console.log(param);
-    //$(".container_list").val(param);
 }

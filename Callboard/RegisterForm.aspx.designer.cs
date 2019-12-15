@@ -24,6 +24,15 @@ namespace Callboard
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
+        /// msg элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl msg;
+
+        /// <summary>
         /// email элемент управления.
         /// </summary>
         /// <remarks>

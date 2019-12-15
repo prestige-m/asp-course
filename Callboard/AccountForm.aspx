@@ -85,6 +85,20 @@
                  </div>
               </div>
            </li>
+          <li class="list-group-item">
+              <div class="row">
+                 <div class="col-md-4 col-sm-4 col-lg-4">
+                   <strong>Місто:</strong>
+                 </div>
+                 <div class="col-md-7 col-sm-7 col-lg-7">
+                     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" 
+                            SelectCommand="SELECT cities.id as city_id, cities.name as city_name FROM cities"></asp:SqlDataSource>
+                     <asp:DropDownList ID="DropDownList1" runat="server" class="form-control" DataSourceID="SqlDataSource1"
+                    DataTextField="city_name" DataValueField="city_id"></asp:DropDownList>
+                 </div>
+              </div>
+           </li>
+
            <li class="list-group-item">
               <div class="row justify-content-center">
                  <div class="col-md-6 col-sm-6 col-lg-6">
@@ -93,7 +107,6 @@
               </div>
            </li>
         </ul>
-
 
     <div class="page-buffer mt-5">
           <div class="row justify-content-center">

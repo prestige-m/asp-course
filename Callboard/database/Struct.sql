@@ -1,4 +1,4 @@
-
+CREATE DATABASE callboard;
 USE callboard;
 
 CREATE TABLE roles(
