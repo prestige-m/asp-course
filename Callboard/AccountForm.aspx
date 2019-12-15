@@ -19,19 +19,22 @@
 
               <div class="row justify-content-center py-2">
         		<div align="center" class="col-sm-8 col-md-8 col-lg-8">
-                     <asp:FileUpload ID="FileUpload1" runat="server" required class="form-control" />
+                     <asp:FileUpload ID="FileUpload1" runat="server" ValidationGroup="photo" class="form-control" />
         		</div>
               </div>
         		<div class="row justify-content-center py-2">
           			<div align="center" class="col-sm-8 col-md-8 col-lg-8">
-                      <asp:Button ID="Button1" runat="server" class="btn btn-secondary btn-block" Text="Замінити фото" />
+                    <asp:Button ID="Button1" runat="server" class="btn btn-secondary btn-block" ValidationGroup="photo"
+                         Text="Замінити фото"  OnCommand="UpdateImage" CommandName="update" />
           			</div>
+                    
         		</div>
   	   </div>
     </div>
-
-
+    
   <div class="col-md-8 col-lg-8 col-sm-8">
+    <div class="row justify-content-center my-2" ><div id="msg" runat="server" class="col-sm-8 col-md-8 col-lg-8"></div></div>
+
       <ul class="list-group">
           <li class="list-group-item">
               <div class="row">
@@ -86,11 +89,12 @@
            <li class="list-group-item">
               <div class="row justify-content-center">
                  <div class="col-md-6 col-sm-6 col-lg-6">
-                     <asp:Button ID="submit" CssClass="btn btn-outline-dark btn-block" runat="server" Text="Змінити дані" OnClick="UpdateUserInfo" />
+                     <asp:Button ID="submit" CssClass="btn btn-outline-primary btn-block" runat="server" Text="Змінити дані" OnClick="UpdateUserInfo" />
                 </div>
               </div>
            </li>
         </ul>
+
 
     <div class="page-buffer mt-5">
           <div class="row justify-content-center">
@@ -100,17 +104,19 @@
           </div>
           <div class="row justify-content-center">
               <div class="col-sm-8 col-md-8 col-lg-8">
-                  <asp:TextBox ID="TextBox1" runat="server" required class="form-control" type="password" maxlength="32"  placeholder="Новий пароль"></asp:TextBox>
+                  <asp:TextBox ID="TextBox1" runat="server"  ValidationGroup="pass" class="form-control" type="password" maxlength="32" placeholder="Новий пароль"></asp:TextBox>
               </div>
           </div>
           <div class="row justify-content-center">
               <div class="col-sm-8 col-md-8 col-lg-8">
-                   <asp:TextBox ID="TextBox2" runat="server" required class="form-control mt-3" type="password" maxlength="32"  placeholder="Підтвердження паролю"></asp:TextBox>
+                   <asp:TextBox ID="TextBox2" runat="server"  ValidationGroup="pass" class="form-control mt-3" type="password" maxlength="32" placeholder="Підтвердження паролю"></asp:TextBox>
               </div>
           </div>
           <div class="row justify-content-center mt-3">
               <div class="col-sm-6 col-md-6 col-lg-6">
-                  <asp:Button ID="Button2" runat="server" Text="Змінити пароль" class="btn btn-outline-primary btn-block" OnClick="ChangePassword"/>
+
+                  <asp:Button ID="Button2" runat="server" class="btn btn-secondary btn-block" ValidationGroup="pass"
+                         Text="Змінити пароль" OnClick="ChangePassword"  />
               </div>
            </div>
     </div>
@@ -118,9 +124,8 @@
 
   </div>     
        
-
-
-    <% } else { %>
+     <% } else { %>
         <usercontrol:Page404 id="Page404" runat="server" />    
     <% } %>
+
 </asp:Content>

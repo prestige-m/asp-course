@@ -80,6 +80,7 @@
     <Content Include="index.aspx" />
     <Content Include="IndexAdmin.aspx" />
     <Content Include="LoginForm.aspx" />
+    <Content Include="MyAnnouncements.aspx" />
     <Content Include="Page404.ascx" />
     <Content Include="RegisterForm.aspx" />
     <Content Include="scripts\bootstrap.bundle.js" />
@@ -100,6 +101,7 @@
     <Content Include="styles\font-awesome.css" />
     <Content Include="styles\font-awesome.min.css" />
     <Content Include="styles\styles1.css" />
+    <Content Include="UpdateAnnouncement.aspx" />
     <Content Include="Web.config" />
     <Content Include="CityService.asmx" />
     <Content Include="WebForm1.aspx" />
@@ -158,6 +160,13 @@
     <Compile Include="LoginForm.aspx.designer.cs">
       <DependentUpon>LoginForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MyAnnouncements.aspx.cs">
+      <DependentUpon>MyAnnouncements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MyAnnouncements.aspx.designer.cs">
+      <DependentUpon>MyAnnouncements.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Page404.ascx.cs">
       <DependentUpon>Page404.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -183,6 +192,13 @@
     <Compile Include="CityService.asmx.cs">
       <DependentUpon>CityService.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UpdateAnnouncement.aspx.cs">
+      <DependentUpon>UpdateAnnouncement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateAnnouncement.aspx.designer.cs">
+      <DependentUpon>UpdateAnnouncement.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>

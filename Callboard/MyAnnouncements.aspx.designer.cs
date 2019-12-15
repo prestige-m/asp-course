@@ -11,79 +11,52 @@ namespace Callboard
 {
 
 
-    public partial class SiteMenu
+    public partial class MyAnnouncements
     {
 
         /// <summary>
-        /// head элемент управления.
+        /// AnnounceData элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.SqlDataSource AnnounceData;
 
         /// <summary>
-        /// form2 элемент управления.
+        /// CategoryData элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form2;
+        protected global::System.Web.UI.WebControls.SqlDataSource CategoryData;
 
         /// <summary>
-        /// first_name элемент управления.
+        /// msg элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label first_name;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl msg;
 
         /// <summary>
-        /// sign_out элемент управления.
+        /// RepeaterItems элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton sign_out;
+        protected global::System.Web.UI.WebControls.Repeater RepeaterItems;
 
         /// <summary>
-        /// SiteMapPath1 элемент управления.
+        /// Page404 элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SiteMapPath SiteMapPath1;
-
-        /// <summary>
-        /// ContentPlaceHolder1 элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
-
-        /// <summary>
-        /// ContentPlaceHolder2 элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder2;
-
-        /// <summary>
-        /// ContentPlaceHolder3 элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder3;
+        protected global::Callboard.Page404 Page404;
     }
 }

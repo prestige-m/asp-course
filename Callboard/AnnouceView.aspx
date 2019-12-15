@@ -24,7 +24,7 @@
        </div>
       <div class="row justify-content-center my-3">
         <div class="col-sm-6 col-md-6 col-lg-6">
-            <asp:HyperLink ID="HyperLink2" runat="server" class="btn btn-block btn-dark" NavigateUrl="~/index.aspx">Назад</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink2" runat="server" class="btn btn-block btn-dark" NavigateUrl="~/index.aspx">Назад</asp:HyperLink>  
         </div>
       </div>
       

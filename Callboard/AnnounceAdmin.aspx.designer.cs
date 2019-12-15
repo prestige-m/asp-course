@@ -60,12 +60,12 @@ namespace Callboard
         protected global::System.Web.UI.WebControls.GridView GridView1;
 
         /// <summary>
-        /// ValidationSummary1 элемент управления.
+        /// Page404 элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        protected global::Callboard.Page404 Page404;
     }
 }

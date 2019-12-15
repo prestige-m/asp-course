@@ -10,17 +10,18 @@ using System.Web.UI.WebControls;
 
 namespace Callboard
 {
-    public partial class index : System.Web.UI.Page
+    public partial class MyAnnouncements : System.Web.UI.Page
     {
         public SqlConnection connection = null;
         public DataSet announcements = new DataSet();
         public const string announceQuery = "SELECT announcements.id as id, title, user_id, announcements.subcategory_id as subcategory_id, " +
-               "subcategories.name as subcategory_name, categories.name as category_name, categories.id as category_id,city_id, announcements.image_name, " +
+               "subcategories.name as subcategory_name, categories.name as category_name, categories.id as category_id,city_id, image_name, " +
                "cities.name as city_name, regions.name as region_name, creation_date, message_text, price FROM announcements " +
                "INNER JOIN subcategories ON subcategories.id = announcements.subcategory_id " +
                "INNER JOIN categories ON subcategories.category_id = categories.id " +
                "INNER JOIN cities ON cities.id = announcements.city_id " +
-               "INNER JOIN regions ON regions.id = cities.region_id ";
+               "INNER JOIN regions ON regions.id = cities.region_id " +
+               "WHERE user_id=@user_id"; 
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,32 +33,34 @@ namespace Callboard
             string connectionString = WebConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             connection = new SqlConnection(connectionString);
 
-            if (Request.QueryString["search_by_category_id"] != null && Request.QueryString["search_by_category_id"]!="")
+            if (Request.QueryString["delete_id"] != null && Request.QueryString["delete_id"] != "")
             {
-                int categoryId = int.Parse(Request.QueryString["search_by_category_id"]);
-                SearchAnnounceByCategoryId(categoryId);
+                int announceId = int.Parse(Request.QueryString["delete_id"]);
+                Alert alert = new Alert();
+                DeleteAnnounceById(announceId);
+                alert.AddMessageAlert("Оголошення видалено.");
+                msg.InnerHtml = alert.GetAlerts();
             }
-            else
-            {
-                SearchAnnounce();
-            }
-        }
-
-        protected void Button3_Click(object sender, EventArgs e)
-        {
             SearchAnnounce();
         }
 
         public void SearchAnnounce()
         {
-            string queryString = announceQuery +
-               "WHERE categories.name LIKE @search_value OR cities.name LIKE @search_value OR message_text LIKE @search_value OR " +
-               "title LIKE @search_value OR subcategories.name LIKE @search_value OR regions.name LIKE @search_value";
+            string queryString = announceQuery;
+            int userId = 0;
+            if(Session["id"] != null)
+            {
+               userId = int.Parse(Session["id"].ToString());
+            }
+            else
+            {
+                return;
+            }
+            
 
-            string searchValue = Search.Text.Trim().ToLowerInvariant();
             SqlCommand select = new SqlCommand(queryString, connection);
             select.CommandType = CommandType.Text;
-            select.Parameters.Add("@search_value", SqlDbType.VarChar, 150).Value = $"%{searchValue}%";
+            select.Parameters.Add("@user_id", SqlDbType.Int).Value = userId;
 
             using (SqlDataAdapter adapter = new SqlDataAdapter(select))
             {
@@ -70,22 +73,22 @@ namespace Callboard
             }
         }
 
-        public void SearchAnnounceByCategoryId(int categoryId)
+        public void DeleteAnnounceById(int id)
         {
-            string queryString = announceQuery + "WHERE categories.id = @category_id";
+            string queryString = "DELETE FROM announcements WHERE id=@id";
 
+            connection.Open();
             SqlCommand select = new SqlCommand(queryString, connection);
             select.CommandType = CommandType.Text;
-            select.Parameters.Add("@category_id", SqlDbType.Int).Value = categoryId;
-
-            using (SqlDataAdapter adapter = new SqlDataAdapter(select))
+            select.Parameters.Add("@id", SqlDbType.Int).Value = id;
+            try
             {
-                adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
-                announcements = new DataSet();
-                adapter.Fill(announcements);
-
-                RepeaterItems.DataSource = announcements;
-                RepeaterItems.DataBind();
+                select.ExecuteNonQuery();
+            }
+            catch { }
+            finally
+            {
+                connection.Close();
             }
         }
     }

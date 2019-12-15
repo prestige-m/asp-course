@@ -10,8 +10,9 @@ namespace Callboard
     {
         private StringBuilder messages = new StringBuilder("<div class=\"alert alert-success\" role=\"alert\"><ul>");
         private StringBuilder errors = new StringBuilder("<div class=\"alert alert-danger\" role=\"alert\"><ul>");
-        private int errorCounter = 0;
-        private int messageCounter = 0;
+
+        public int errorCounter { protected set; get; }
+        public int messageCounter { protected set; get; }
         public string getErrors()
         {
             if (errorCounter > 0)
@@ -45,7 +46,11 @@ namespace Callboard
 
         public string GetAlerts()
         {
-            return this.getErrors() + this.getMessages();
+            string result = this.getErrors() + this.getMessages();
+            messages = new StringBuilder();
+            errors = new StringBuilder();
+            errorCounter = messageCounter = 0;
+            return result;
         }
     }
 }

@@ -8,16 +8,14 @@ namespace Callboard
 {
     public static class ImageLoader
     {
-        public static string SaveImage(ref Alert alert, FileUpload file, string folderPath, int itemId)
+        public static string SaveImage(ref Alert alert, FileUpload file, string folderPath, string pattern, int itemId, string image_name="no-image.png")
         {
-            string image_name = "no-image.png";
-            
             if ((file.PostedFile != null) && (file.PostedFile.ContentLength > 0))
             {
                 string[] types = { "jpeg", "jpg", "png", "bmp", "gif" };
                 string fileName = System.IO.Path.GetFileName(file.PostedFile.FileName);
                 string fileType = fileName.Split('.')[1];
-                image_name = $"item_{itemId}.{fileType}";
+                image_name = $"{pattern}_{itemId}.{fileType}";
                 string SaveLocation = folderPath + "\\" + image_name;
                 if (types.Contains(fileType))
                 {

@@ -28,7 +28,20 @@ namespace Callboard
             if (!IsPostBack)
             {
                 LoadUserInfo();
-            }     
+            }
+
+            if (Request.QueryString["update_user_info"] != null && Request.QueryString["update_user_info"] == "true")
+            {
+                //UpdateUserInfo();
+            }
+            if (Request.QueryString["change_image"] != null && Request.QueryString["change_image"] == "true")
+            {
+                //UpdateImage();
+            }
+            if (Request.QueryString["change_password"] != null && Request.QueryString["change_password"] == "true")
+            {
+                //ChangePassword();
+            }
         }
 
         public static string GetHash(MD5 md5, string input)
@@ -42,7 +55,8 @@ namespace Callboard
 
         public int ChangeImage(int id, string imageName)
         {
-            string queryStr = "UPDATE announcements SET image_name=@image_name WHERE id=@id";
+            
+            string queryStr = "UPDATE users SET image_name=@image_name WHERE id=@id";
 
             int result = 0;
             connection.Open();
@@ -54,6 +68,7 @@ namespace Callboard
             try
             {
                 result = command.ExecuteNonQuery();
+                Image1.ImageUrl = $"~/images/user/{imageName}";
             }
             catch { }
             finally
@@ -63,18 +78,41 @@ namespace Callboard
             return result;
         }
 
+        protected void UpdateImage(object sender, EventArgs e)
+        {
+            Alert alert = new Alert();
+            int user_id = int.Parse(Session["id"].ToString());
+            string pattern = "user";
+            string noImage = "default.png";
+            var folderPath = Server.MapPath("images") + "\\user";
+            string imageName = ImageLoader.SaveImage(ref alert, FileUpload1, folderPath, pattern, user_id, noImage);
+            ChangeImage(user_id, imageName);
+            msg.InnerHtml = alert.GetAlerts();
+        }
+
         protected void ChangePassword(object sender, EventArgs e)
         {
             string pass = TextBox1.Text;
             string pass_repeat = TextBox2.Text;
             Alert alert = new Alert();
+
+            if(pass == string.Empty)
+            {
+                alert.AddErrorAlert("Заповніть поле 'Новий пароль'!");
+            }
+            if (pass_repeat == string.Empty)
+            {
+                alert.AddErrorAlert("Заповніть поле 'Підтвердження паролю'!");
+            }
             if (pass != pass_repeat)
             {
                 alert.AddErrorAlert("Паролі не співпадають!");
-                Response.Write(alert.GetAlerts());
+            }
+            if (alert.errorCounter > 0)
+            {
+                msg.InnerHtml = alert.GetAlerts();
                 return;
             }
-
             try
             {
                 connection.Open();
@@ -111,6 +149,7 @@ namespace Callboard
                 patronymic.Text = reader["patronymic"].ToString();
                 email.Text = reader["email"].ToString();
                 contact.Text = reader["contact"].ToString();
+                Image1.ImageUrl = $"~/images/user/{reader["image_name"].ToString()}";
 
                 Session.RemoveAll();
                 Session.Add("id", reader["id"].ToString());
@@ -123,8 +162,6 @@ namespace Callboard
             }
             catch
             {
-                //errors.Text = "Виникла помилка на стороні сервера.";
-                //password.Text = "";
             }
             finally
             {
@@ -134,6 +171,7 @@ namespace Callboard
 
         protected void UpdateUserInfo(object sender, EventArgs e)
         {
+            Alert alert = new Alert();
             try
             {
                 connection.Open();
@@ -147,15 +185,17 @@ namespace Callboard
                 select.Parameters.AddWithValue("@email", email.Text);
                 select.Parameters.AddWithValue("@contact", contact.Text);
                 select.ExecuteNonQuery();
+                alert.AddMessageAlert("Дані успішно оновлено.");
                 LoadUserInfo();
             }
             catch
             {
-
+                alert.AddErrorAlert("Помилка з’єдання до бази даних!");
             }
             finally
             {
                 connection.Close();
+                msg.InnerHtml = alert.GetAlerts();
             }           
         }
 

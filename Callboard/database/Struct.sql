@@ -44,8 +44,10 @@ password VARCHAR(100) NOT NULL,
 first_name VARCHAR(100) NOT NULL,
 last_name VARCHAR(100) NOT NULL,
 patronymic VARCHAR(100) NOT NULL,
+image_name VARCHAR(100) DEFAULT('default.png'),
 contact VARCHAR(200),
 role_id INT FOREIGN KEY REFERENCES roles(id) NOT NULL,
+is_active INT DEFAULT(0) NOT NULL,
 creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 

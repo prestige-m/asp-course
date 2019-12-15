@@ -13,25 +13,29 @@ namespace Callboard
     public partial class AnnouceView : System.Web.UI.Page
     {
         public SqlConnection connection = null;
+        public string referer = "~/index.aspx";
         protected void Page_Load(object sender, EventArgs e)
         {
             string connectionString = WebConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             connection = new SqlConnection(connectionString);
 
+            referer = $"~/{Request.UrlReferrer.ToString().Split('/')[3]}";
             if (Request.QueryString["announce_id"] != null && Request.QueryString["announce_id"] != "")
             {
                 int announceId = int.Parse(Request.QueryString["announce_id"]);
                 GetAnounceById(announceId);
+                HyperLink2.NavigateUrl = referer;
             }
             else { 
                 Response.Redirect("~/AnnouceView.aspx?announce_id=2");
+                HyperLink2.NavigateUrl = referer;
             }
         }
 
         public void GetAnounceById(int id)
         {
             string queryString = "SELECT announcements.id as id, title, user_id, users.first_name as user_name,  announcements.subcategory_id as subcategory_id, " +
-               "subcategories.name as subcategory_name, categories.name as category_name, categories.id as category_id,city_id, image_name, " +
+               "subcategories.name as subcategory_name, categories.name as category_name, categories.id as category_id,city_id, announcements.image_name, " +
                "cities.name as city_name, regions.name as region_name, announcements.creation_date, message_text, price FROM announcements " +
                "INNER JOIN subcategories ON subcategories.id = announcements.subcategory_id " +
                "INNER JOIN categories ON subcategories.category_id = categories.id " +

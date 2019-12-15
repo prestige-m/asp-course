@@ -118,15 +118,14 @@ namespace Callboard
             if (annouce_id > 0)
             {
                 alerts.AddMessageAlert("Оголошення успішно додано.");
-                string imageName = ImageLoader.SaveImage(ref alerts, FileUpload1, Server.MapPath("images"), annouce_id);
+                string pattern = "item";
+                string imageName = ImageLoader.SaveImage(ref alerts, FileUpload1, Server.MapPath("images"), pattern, annouce_id);
                 ChangeImage(annouce_id, imageName);
             }
             else
             {
-                //result = Alert.getErrorAlert("Помилка при завантаженні даних у базу!");
+                alerts.AddErrorAlert("Помилка при завантаженні даних у базу!");
             }
-           
-            //Response.Write(alerts.GetAlerts());
             msg.InnerHtml = alerts.GetAlerts();
         }
     }

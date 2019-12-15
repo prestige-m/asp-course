@@ -3,13 +3,12 @@
   <siteMapNode url="index.aspx" title="Головна" description="">
     <siteMapNode url="finished.aspx" title="Завершені" description="" />
     <siteMapNode url="AnnounceView.aspx" title="Перегляд оголошення" description="" />
-    <siteMapNode url="IndexAdmin.aspx" title="Панель адміністратора" description="" />
+    
     <siteMapNode url="LoginForm.aspx" title="Вхід до акаунту" description="" />
     <siteMapNode url="RegisterForm.aspx" title="Реєстрація" description="" />
-    
-    <siteMapNode url="admin.aspx" title="Панель Адміністратора" description="" >
-      <siteMapNode url="petitions_edit.aspx" title="Редагування петицій" description="" />
-      <siteMapNode url="followers.aspx" title="Підписи петицій" description="" />
+
+    <siteMapNode url="IndexAdmin.aspx" title="Панель адміністратора" description="" >
+        <siteMapNode url="AnnounceAdmin.aspx" title="Таблиця 'Оголошення'" description="" />
     </siteMapNode>
     
     <siteMapNode url="account.aspx" title="Особистий кабінет" description="">

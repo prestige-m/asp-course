@@ -32,6 +32,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="CreateAnnouncement.aspx">Створити оголошення</a> 
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="MyAnnouncements.aspx">Мої оголошення</a> 
+                            </li>
                         <% } %>
                         <% if (Session.Count != 0 && Session["role_id"].ToString() == "1") { %>
                             <li class="nav-item">
@@ -69,6 +72,10 @@
                     <RootNodeStyle Font-Bold="True" ForeColor="#507CD1" />
                 </asp:SiteMapPath>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"> 
+                </asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server"> 
+                </asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server"> 
                 </asp:ContentPlaceHolder>
             </div>
             <div class="page-buffer">&nbsp;
