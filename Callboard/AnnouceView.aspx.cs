@@ -19,7 +19,15 @@ namespace Callboard
             string connectionString = WebConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             connection = new SqlConnection(connectionString);
 
-            referer = $"~/{Request.UrlReferrer.ToString().Split('/')[3]}";
+            try
+            {
+                referer = $"~/{Request.UrlReferrer.ToString().Split('/')[3]}";
+            }
+            catch
+            {
+                referer = "~/index.aspx";
+            }
+            
             if (Request.QueryString["announce_id"] != null && Request.QueryString["announce_id"] != "")
             {
                 int announceId = int.Parse(Request.QueryString["announce_id"]);
@@ -35,13 +43,12 @@ namespace Callboard
         public void GetAnounceById(int id)
         {
             string queryString = "SELECT announcements.id as id, title, user_id, users.first_name as user_name,  announcements.subcategory_id as subcategory_id, " +
-               "subcategories.name as subcategory_name, categories.name as category_name, categories.id as category_id,city_id, announcements.image_name, " +
-               "cities.name as city_name, regions.name as region_name, announcements.creation_date, message_text, price FROM announcements " +
+               "subcategories.name as subcategory_name, categories.name as category_name, categories.id as category_id, announcements.image_name, cities.name as city_name, " +
+               "announcements.creation_date, message_text, price FROM announcements " +
                "INNER JOIN subcategories ON subcategories.id = announcements.subcategory_id " +
                "INNER JOIN categories ON subcategories.category_id = categories.id " +
-               "INNER JOIN cities ON cities.id = announcements.city_id " +
-               "INNER JOIN regions ON regions.id = cities.region_id " +
                "INNER JOIN users ON users.id = announcements.user_id " +
+               "INNER JOIN cities ON users.city_id = cities.id " +
                "WHERE announcements.id=@announce_id";
 
             connection.Open();
@@ -58,6 +65,11 @@ namespace Callboard
             Label3.Text = reader["user_name"].ToString();
             Label4.Text = reader["message_text"].ToString();
             Label5.Text = $"Оголошення № {reader["id"].ToString()}, розміщено {reader["creation_date"].ToString()}";
+            Label6.Text = "";
+            if (reader["price"].ToString() != string.Empty)
+            {
+                Label6.Text = $"{reader["price"].ToString()} грн.";
+            }
             connection.Close();
         }
     }

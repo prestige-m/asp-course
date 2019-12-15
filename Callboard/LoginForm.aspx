@@ -13,7 +13,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-12 col-md-5 mt-3">
-                <asp:TextBox ID="email" CssClass="form-control" runat="server" required="required" type="email" placeholder="Електронна адреса користувача"></asp:TextBox>
+                <asp:TextBox ID="email" CssClass="form-control" runat="server" required="required" type="email" placeholder="Електронна адреса"></asp:TextBox>
             </div>
         </div>
         <div class="row justify-content-center">

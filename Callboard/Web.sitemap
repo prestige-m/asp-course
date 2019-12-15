@@ -1,21 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
   <siteMapNode url="index.aspx" title="Головна" description="">
-    <siteMapNode url="finished.aspx" title="Завершені" description="" />
+    <siteMapNode url="AccountForm.aspx" title="Кабінет" description="" />
     <siteMapNode url="AnnounceView.aspx" title="Перегляд оголошення" description="" />
     
     <siteMapNode url="LoginForm.aspx" title="Вхід до акаунту" description="" />
     <siteMapNode url="RegisterForm.aspx" title="Реєстрація" description="" />
 
     <siteMapNode url="IndexAdmin.aspx" title="Панель адміністратора" description="" >
-        <siteMapNode url="AnnounceAdmin.aspx" title="Таблиця 'Оголошення'" description="" />
+       <siteMapNode url="AnnounceAdmin.aspx" title="Таблиця 'Оголошення'" description="" />
+       <siteMapNode url="UsersAdmin.aspx" title="Таблиця 'Користувачі'" description="" />
     </siteMapNode>
     
-    <siteMapNode url="account.aspx" title="Особистий кабінет" description="">
-      <siteMapNode url="subscribed_petitions.aspx" title="Підтримані мною" description="" />
-      <siteMapNode url="my_petitions.aspx" title="Мої петиції" description="" />
-    </siteMapNode>
-    
-    <siteMapNode url="create_petition.aspx" title="Створити петицію" description="" />
+    <siteMapNode url="MyAnnouncements.aspx" title="Мої оголошення" description="" />
+    <siteMapNode url="CreateAnnouncement.aspx" title="Створити оголошення" description="" />
+    <siteMapNode url="UpdateAnnouncement.aspx" title="Оновити оголошення" description="" />
   </siteMapNode>
 </siteMap>

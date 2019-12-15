@@ -15,15 +15,6 @@ namespace Callboard
     {
 
         /// <summary>
-        /// AnnounceData элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource AnnounceData;
-
-        /// <summary>
         /// CategoryData элемент управления.
         /// </summary>
         /// <remarks>

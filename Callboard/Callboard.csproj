@@ -102,9 +102,9 @@
     <Content Include="styles\font-awesome.min.css" />
     <Content Include="styles\styles1.css" />
     <Content Include="UpdateAnnouncement.aspx" />
+    <Content Include="UsersAdmin.aspx" />
     <Content Include="Web.config" />
     <Content Include="CityService.asmx" />
-    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountForm.aspx.cs">
@@ -137,7 +137,6 @@
     <Compile Include="CreateAnnouncement.aspx.designer.cs">
       <DependentUpon>CreateAnnouncement.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Encrypt.cs" />
     <Compile Include="ImageLoader.cs" />
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
@@ -200,12 +199,12 @@
     <Compile Include="UpdateAnnouncement.aspx.designer.cs">
       <DependentUpon>UpdateAnnouncement.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="UsersAdmin.aspx.cs">
+      <DependentUpon>UsersAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="UsersAdmin.aspx.designer.cs">
+      <DependentUpon>UsersAdmin.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

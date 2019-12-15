@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMenu.Master" AutoEventWireup="true" CodeBehind="MyAnnouncements.aspx.cs" Inherits="Callboard.MyAnnouncements" %>
 <%@ Register TagPrefix="usercontrol" TagName="Page404" Src="~/Page404.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+      <title>Мої оголошення</title>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -72,9 +73,16 @@
             </div>
 
               <div class="row justify-content-center mb-4">
-                  <asp:HyperLink ID="HyperLink2" runat="server" CssClass="float-right" NavigateUrl='<%# string.Format("~/MyAnnouncements.aspx?delete_id={0}", Eval("id")) %>'>
-                        <i class="fas fa-times"></i> Видалити
-                   </asp:HyperLink>
+                  <div class="col-sm-3 col-md-3 col-lg-3 float-right">
+                      <asp:HyperLink ID="HyperLink2" runat="server" CssClass="btn btn-success btn-block" NavigateUrl='<%# string.Format("~/UpdateAnnouncement.aspx?id={0}", Eval("id")) %>'>
+                            Редагувати <i class="fas fa-pencil-alt"></i> 
+                       </asp:HyperLink>
+                   </div>
+                  <div class="col-sm-3 col-md-3 col-lg-3 float-left">
+                      <asp:HyperLink ID="HyperLink3" runat="server" CssClass="btn btn-danger btn-block" NavigateUrl='<%# string.Format("~/MyAnnouncements.aspx?delete_id={0}", Eval("id")) %>'>
+                             Видалити <i class="fas fa-times"></i> 
+                       </asp:HyperLink>
+                   </div>
               </div>
 
           </ItemTemplate>

@@ -16,10 +16,11 @@ namespace Callboard
         public DataSet announcements = new DataSet();
         public const string announceQuery = "SELECT announcements.id as id, title, user_id, announcements.subcategory_id as subcategory_id, " +
                "subcategories.name as subcategory_name, categories.name as category_name, categories.id as category_id,city_id, announcements.image_name, " +
-               "cities.name as city_name, regions.name as region_name, creation_date, message_text, price FROM announcements " +
+               "cities.name as city_name, regions.name as region_name, announcements.creation_date, message_text, price FROM announcements " +
                "INNER JOIN subcategories ON subcategories.id = announcements.subcategory_id " +
                "INNER JOIN categories ON subcategories.category_id = categories.id " +
-               "INNER JOIN cities ON cities.id = announcements.city_id " +
+               "INNER JOIN users ON announcements.user_id = users.id "+
+               "INNER JOIN cities ON cities.id = users.city_id " +
                "INNER JOIN regions ON regions.id = cities.region_id ";
 
         protected void Page_Load(object sender, EventArgs e)

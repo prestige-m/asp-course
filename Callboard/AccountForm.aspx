@@ -27,7 +27,6 @@
                     <asp:Button ID="Button1" runat="server" class="btn btn-secondary btn-block" ValidationGroup="photo"
                          Text="Замінити фото"  OnCommand="UpdateImage" CommandName="update" />
           			</div>
-                    
         		</div>
   	   </div>
     </div>

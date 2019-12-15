@@ -29,19 +29,6 @@ namespace Callboard
             {
                 LoadUserInfo();
             }
-
-            if (Request.QueryString["update_user_info"] != null && Request.QueryString["update_user_info"] == "true")
-            {
-                //UpdateUserInfo();
-            }
-            if (Request.QueryString["change_image"] != null && Request.QueryString["change_image"] == "true")
-            {
-                //UpdateImage();
-            }
-            if (Request.QueryString["change_password"] != null && Request.QueryString["change_password"] == "true")
-            {
-                //ChangePassword();
-            }
         }
 
         public static string GetHash(MD5 md5, string input)
@@ -86,7 +73,11 @@ namespace Callboard
             string noImage = "default.png";
             var folderPath = Server.MapPath("images") + "\\user";
             string imageName = ImageLoader.SaveImage(ref alert, FileUpload1, folderPath, pattern, user_id, noImage);
-            ChangeImage(user_id, imageName);
+            if (imageName != noImage)
+            {
+                ChangeImage(user_id, imageName);
+            }
+            
             msg.InnerHtml = alert.GetAlerts();
         }
 
@@ -148,7 +139,7 @@ namespace Callboard
                 last_name.Text = reader["last_name"].ToString();
                 patronymic.Text = reader["patronymic"].ToString();
                 email.Text = reader["email"].ToString();
-                contact.Text = reader["contact"].ToString();
+                contact.Text = reader["phone"].ToString();
                 Image1.ImageUrl = $"~/images/user/{reader["image_name"].ToString()}";
 
                 Session.RemoveAll();
@@ -157,8 +148,9 @@ namespace Callboard
                 Session.Add("first_name", reader["first_name"].ToString());
                 Session.Add("last_name", reader["last_name"].ToString());
                 Session.Add("patronymic", reader["patronymic"].ToString());
-                Session.Add("contact", reader["contact"].ToString());
+                Session.Add("phone", reader["phone"].ToString());
                 Session.Add("role_id", reader["role_id"].ToString());
+                Session.Add("city_id", reader["city_id"].ToString());
             }
             catch
             {
@@ -176,14 +168,15 @@ namespace Callboard
             {
                 connection.Open();
                 System.Data.SqlClient.SqlCommand select = new System.Data.SqlClient.SqlCommand("UPDATE users SET first_name=@first_name, " +
-                    "last_name=@last_name, patronymic=@patronymic, email=@email, contact=@contact WHERE id=@user_id", connection);
+                    "last_name=@last_name, patronymic=@patronymic, email=@email, phone=@phone, city_id=@city_id WHERE id=@user_id", connection);
                 select.CommandType = System.Data.CommandType.Text;
                 select.Parameters.AddWithValue("@user_id", int.Parse(Session["id"].ToString()));
                 select.Parameters.AddWithValue("@first_name", first_name.Text);
                 select.Parameters.AddWithValue("@last_name", last_name.Text);
                 select.Parameters.AddWithValue("@patronymic", patronymic.Text);
                 select.Parameters.AddWithValue("@email", email.Text);
-                select.Parameters.AddWithValue("@contact", contact.Text);
+                select.Parameters.AddWithValue("@phone", contact.Text);
+                select.Parameters.AddWithValue("@city_id", contact.Text);
                 select.ExecuteNonQuery();
                 alert.AddMessageAlert("Дані успішно оновлено.");
                 LoadUserInfo();

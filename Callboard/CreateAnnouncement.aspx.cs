@@ -56,14 +56,14 @@ namespace Callboard
             return result;
         }
 
-        public int InsertAnnounce(string title, int user_id, int subcategory_id, int city_id, string message, decimal? price)
+        public int InsertAnnounce(string title, int user_id, int subcategory_id, string message, decimal? price)
         {
             string queryStr = "INSERT INTO announcements (title, user_id, subcategory_id, city_id, message_text, price) " +
-                         "VALUES (@title, @user_id, @subcategory_id, @city_id, @message, @price)";
+                         "VALUES (@title, @user_id, @subcategory_id, @message, @price)";
             if (price == null)
             {
                 queryStr = "INSERT INTO announcements (title, user_id, subcategory_id, city_id, message_text) " +
-                        "VALUES (@title, @user_id, @subcategory_id, @city_id, @message)";
+                        "VALUES (@title, @user_id, @subcategory_id, @message)";
             }
 
             int lastID= 0;
@@ -73,7 +73,6 @@ namespace Callboard
             command.Parameters.Add("@title", SqlDbType.VarChar, 150).Value = title;
             command.Parameters.Add("@user_id", SqlDbType.Int).Value = user_id;
             command.Parameters.Add("@subcategory_id", SqlDbType.Int).Value = subcategory_id;
-            command.Parameters.Add("@city_id", SqlDbType.Int).Value = city_id;
             command.Parameters.Add("@message", SqlDbType.Text).Value = message;
             if (price != null)
                 command.Parameters.Add("@price", SqlDbType.Decimal).Value = price;
@@ -99,8 +98,7 @@ namespace Callboard
         protected void Button1_Click(object sender, EventArgs e)
         {
             string title = TextBox1.Text;
-            int city_id = int.Parse(DropDownList1.SelectedValue);
-            int subcategory_id = int.Parse(Label1.Text);
+            int subcategory_id = int.Parse(DropDownList1.SelectedValue);
             string message = TextBox2.Text;
             decimal? price = null;
             int userId = int.Parse(Session["id"].ToString());
@@ -114,7 +112,7 @@ namespace Callboard
             }
 
             Alert alerts = new Alert();
-            int annouce_id = InsertAnnounce(title, userId, subcategory_id, city_id, message, price);
+            int annouce_id = InsertAnnounce(title, userId, subcategory_id, message, price);
             if (annouce_id > 0)
             {
                 alerts.AddMessageAlert("Оголошення успішно додано.");

@@ -54,8 +54,9 @@ namespace Callboard
                     Session.Add("first_name", reader["first_name"].ToString());
                     Session.Add("last_name", reader["last_name"].ToString());
                     Session.Add("patronymic", reader["patronymic"].ToString());
-                    Session.Add("contact", reader["contact"].ToString());
+                    Session.Add("phone", reader["phone"].ToString());
                     Session.Add("role_id", reader["role_id"].ToString());
+                    Session.Add("city_id", reader["city_id"].ToString());
                     Response.Redirect("index.aspx");
                 }
                 errors.Text = "Користувача не знайдено!";

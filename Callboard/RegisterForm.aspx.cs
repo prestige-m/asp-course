@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Web;
 using System.Web.Configuration;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -27,6 +28,14 @@ namespace Callboard
 
             string connectionString = WebConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             connection = new SqlConnection(connectionString);
+        }
+
+        [WebMethod()]
+        [System.Web.Script.Services.ScriptMethod]
+        public static List<City> GetCitiesInRegion(int regionID)
+        {
+            CityService service = new CityService();
+            return service.GetCitiesInRegion(regionID);
         }
 
         public static string GetHash(MD5 md5, string input)
@@ -62,8 +71,8 @@ namespace Callboard
                     }
                     if (!error)
                     {
-                        string sql_text = "INSERT INTO users (email, password, first_name, last_name, patronymic, contact, role_id)" +
-                            "VALUES (@email, @password, @first_name, @last_name, @patronymic, @contact, @role_id)";
+                        string sql_text = "INSERT INTO users (email, password, first_name, last_name, patronymic, phone, role_id, city_id)" +
+                            "VALUES (@email, @password, @first_name, @last_name, @patronymic, @phone, @role_id, @city_id)";
 
                         SqlCommand insert = new SqlCommand(sql_text, connection);
                         insert.CommandType = CommandType.Text;
@@ -72,8 +81,9 @@ namespace Callboard
                         insert.Parameters.AddWithValue("@first_name", first_name.Text);
                         insert.Parameters.AddWithValue("@last_name", last_name.Text);
                         insert.Parameters.AddWithValue("@patronymic", patronymic.Text);
-                        insert.Parameters.AddWithValue("@contact", contact.Text);
+                        insert.Parameters.AddWithValue("@phone", contact.Text);
                         insert.Parameters.AddWithValue("@role_id", DEFAULT_ROLE_ID);
+                        insert.Parameters.AddWithValue("@city_id", int.Parse(Label1.Text));
                         insert.ExecuteNonQuery();
                         Thread.Sleep(2000);
                         SqlCommand select_user = new SqlCommand("SELECT * FROM users WHERE email = @email and password = @password", connection);
@@ -89,9 +99,10 @@ namespace Callboard
                             Session.Add("first_name", reader_user["first_name"].ToString());
                             Session.Add("last_name", reader_user["last_name"].ToString());
                             Session.Add("patronymic", reader_user["patronymic"].ToString());
-                            Session.Add("contact", reader_user["contact"].ToString());
+                            Session.Add("phone", reader_user["phone"].ToString());
                             Session.Add("role_id", reader_user["role_id"].ToString());
-                            Response.Redirect("index.aspx?registration_success=true");
+                            Session.Add("city_id", reader_user["city_id"].ToString());
+                            Response.Redirect("index.aspx");
                         }
                     }
                 }

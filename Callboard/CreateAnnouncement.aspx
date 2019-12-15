@@ -1,28 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMenu.Master" AutoEventWireup="true" CodeBehind="CreateAnnouncement.aspx.cs" Inherits="Callboard.CreateAnnouncement" EnableEventValidation="false" %>
 <%@ Register TagPrefix="usercontrol" TagName="Page404" Src="~/Page404.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <title>Створити оголошення</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
     <div class="row justify-content-center my-2" ><div id="msg" runat="server" class="col-sm-8 col-md-8 col-lg-6"></div></div>
 
-    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
-        <Services>
-            <asp:ServiceReference Path="~/CityService.asmx" />
-        </Services>
-    </asp:ScriptManager>
-
     <% if (Session.Count != 0) { %>
-    <asp:SqlDataSource ID="AnnounceData" runat="server" 
-        ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" 
-        SelectCommand="SELECT announcements.id as id, title, user_id, announcements.subcategory_id as subcategory_id, subcategories.name as subcategory_name,
-                        categories.name as category_name, categories.id as category_id,
-                        city_id, image_name, cities.name as city_name, regions.name as region_name, creation_date, message_text, price FROM announcements
-                        INNER JOIN subcategories ON subcategories.id = announcements.subcategory_id
-                        INNER JOIN categories ON subcategories.category_id = categories.id
-                        INNER JOIN cities ON cities.id = announcements.city_id
-                        INNER JOIN regions ON regions.id = cities.region_id"></asp:SqlDataSource>
-   
+
+
+     <div class="row justify-content-center mt-2">
+            <h1 class="display-5">Створити оголошення</h1>
+     </div>
+
     <div class="row justify-content-center my-4">
         <ul class="list-group">
            <li class="list-group-item">
@@ -58,24 +49,7 @@
                  </div>
               </div>
            </li>
-           <li class="list-group-item">
-              <div class="row">
-                 <div class="col-md-4 col-sm-4 col-lg-4">
-                   <strong>Область / Місто:</strong>
-                 </div>
-                 <div class="col-md-8 col-sm-8 col-lg-8">
-                     <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" 
-                                 SelectCommand="SELECT regions.id as region_id, regions.name as region_name FROM regions"
-                                 EnableCaching="True" CacheDuration="20"></asp:SqlDataSource>
-
-                     <asp:DropDownList ID="DropDownList3" runat="server" class="form-control target" DataSourceID="SqlDataSource3"
-                         DataTextField="region_name" DataValueField="region_id" onchange="GetCities(this.value);"></asp:DropDownList>
-                     <asp:DropDownList ID="DropDownList4" name="list-data" class="form-control container_list" runat="server" onchange="SetChange(this.value);"
-                         DataTextField="city_name" DataValueField="city_id"></asp:DropDownList>
-                     <asp:Label ID="Label1" runat="server" CssClass="val" Text="1" Visible="false"></asp:Label>
-                 </div>
-              </div>
-           </li>
+           
             <li class="list-group-item">
               <div class="row">
                  <div class="col-md-4 col-sm-4 col-lg-4">

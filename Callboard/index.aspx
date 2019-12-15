@@ -1,21 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMenu.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="Callboard.index" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <title>Головна сторінка</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:SqlDataSource ID="AnnounceData" runat="server" 
-        ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" 
-        SelectCommand="SELECT announcements.id as id, title, user_id, announcements.subcategory_id as subcategory_id, subcategories.name as subcategory_name,
-                        categories.name as category_name, categories.id as category_id,
-                        city_id, image_name, cities.name as city_name, regions.name as region_name, creation_date, message_text, price FROM announcements
-                        INNER JOIN subcategories ON subcategories.id = announcements.subcategory_id
-                        INNER JOIN categories ON subcategories.category_id = categories.id
-                        INNER JOIN cities ON cities.id = announcements.city_id
-                        INNER JOIN regions ON regions.id = cities.region_id"></asp:SqlDataSource>
+
     <asp:SqlDataSource ID="CategoryData" runat="server" 
         ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" 
         SelectCommand="SELECT categories.id as category_id, categories.name as category_name FROM categories;"></asp:SqlDataSource>
 
-   
     <div class="row">
 
  <div class="col-sm-3 col-md-3 col-lg-3">
